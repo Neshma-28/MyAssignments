@@ -2,12 +2,12 @@ package week3.day2;
 //Super Class
 public class Browser {
 	//Defined Local variable
-     String developer="CHROME";
-	 float version=91.0F;
+     String BrowserName="CHROME";
+	 float Browserversion=91.0F;
 	//Define Method
 	public void openurl() {
 	
-	System.out.println(developer);
+	System.out.println(BrowserName);
 			
 	}
 	//Define Method
