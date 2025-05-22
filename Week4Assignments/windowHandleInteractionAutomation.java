@@ -39,49 +39,40 @@ public class windowHandleInteractionAutomation {
 		//widget opening for From contact
 		driver.findElement(By.xpath("//img[@alt='Lookup']")).click();
 
-		//get windowHandle method for main window
-		String mainWindow = driver.getWindowHandle();
-        for (String handle : driver.getWindowHandles()) {
-            driver.switchTo().window(handle);
-        }
-      // Click on the widget of the "From Contact"
+			 Set<String> ChildWindow=driver.getWindowHandles();
+	String mainWindow = driver.getWindowHandle();
+	List<String> listWindow=new ArrayList<String>(ChildWindow);
+	for (int i = 0; i <listWindow.size(); i++) {
+		String Window=listWindow.get(i);
+		driver.switchTo().window(Window);
+		}
+	driver.findElement(By.xpath("(//div[@class='x-grid3-cell-inner x-grid3-col-partyId'])[1]/a")).click();
+	driver.switchTo().window(mainWindow);
+	driver.findElement(By.xpath("(//img[@alt='Lookup'])[2]")).click();
+	Set<String> ChildWindow1=driver.getWindowHandles();
+	//String mainWindow1 = driver.getWindowHandle();*/
+	List<String> listWindow1=new ArrayList<String>(ChildWindow1);
+	for (int i = 0; i <listWindow1.size(); i++) {
+		String Window1=listWindow1.get(i);
+		driver.switchTo().window(Window1);
+		}
+	driver.findElement(By.xpath("(//div[@class='x-grid3-cell-inner x-grid3-col-partyId'])[2]/a")).click();
+	driver.switchTo().window(mainWindow);
+	driver.findElement(By.linkText("Merge")).click();  
+    //Alert Accepted
+    Alert alert = driver.switchTo().alert();
+    alert.accept();
+    //To get the Title
+    String title1 = driver.getTitle();
+    if (title1.contains("Merge Contact")) {
+        System.out.println("Title Matched"+title1);
+    } else {
+         System.out.println("Title not matched"+ title1);
+    }
 
-       driver.findElement(By.xpath("(//div[@class='x-grid3-cell-inner x-grid3-col-partyId'])[1]/a")).click();
-       //Switchto method for mainwindow
-       driver.switchTo().window(mainWindow);
-       
-       //widget opening for To contact
-       driver.findElement(By.xpath("(//img[@alt='Lookup'])[2]")).click();
-        
-        for (String handle1 : driver.getWindowHandles()) {
-            driver.switchTo().window(handle1);
-        }
-        // Click on the widget of the "To Contact"
-        driver.findElement(By.xpath("(//div[@class='x-grid3-cell-inner x-grid3-col-partyId'])[2]/a")).click();
-        //Switch to mainwindow
-        driver.switchTo().window(mainWindow);
-        //Click to Merge button
-        driver.findElement(By.linkText("Merge")).click();  
-        //Alert Accepted
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
-        //To get the Title
-        String title1 = driver.getTitle();
-        if (title1.contains("Merge Contact")) {
-            System.out.println("Title Matched"+title1);
-        } else {
-             System.out.println("Title not matched"+ title1);
-        }
-
-        //Close the browser
-        driver.quit();
-
-        
-        
-        }
-			
-		
-	}
-
-
-
+    //Close the browser
+   // driver.quit();
+   }
+    
+	
+}
